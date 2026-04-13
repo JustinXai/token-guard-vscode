@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B59B6"/>
+      <stop offset="100%" stop-color="#6C3483"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Shield Body -->
+  <path d="M64 8 L112 24 L112 64 C112 96 64 120 64 120 C64 120 16 96 16 64 L16 24 Z"
+        fill="url(#shieldGrad)" filter="url(#glow)"/>
+
+  <!-- Inner Shield -->
+  <path d="M64 18 L104 31 L104 64 C104 90 64 110 64 110 C64 110 24 90 24 64 L24 31 Z"
+        fill="#1a1a2e" opacity="0.3"/>
+
+  <!-- Funnel/Filter Symbol -->
+  <path d="M44 52 L84 52 L74 72 L64 82 L54 72 Z"
+        fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Top of funnel -->
+  <line x1="44" y1="52" x2="84" y2="52" stroke="white" stroke-width="4"/>
+
+  <!-- Drip lines (compressed code) -->
+  <line x1="52" y1="86" x2="52" y2="98" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="64" y1="90" x2="64" y2="102" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="76" y1="86" x2="76" y2="98" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Shine effect -->
+  <path d="M40 30 Q50 25 60 30" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
+</svg>

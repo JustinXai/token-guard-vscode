@@ -1,0 +1,49 @@
+{
+  "name": "token-guard",
+  "displayName": "TokenGuard: AI Code Dehydrator",
+  "description": "Dehydrate code to save 50%+ tokens for Cursor and Claude. Eliminate comments, compress whitespace, and protect Python indentation — one-click to clipboard.",
+  "version": "1.0.0",
+  "publisher": "justinxai",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JustinXai/token-guard-vscode"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "token-guard.dehydrate",
+        "title": "TokenGuard: Dehydrate for AI"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "token-guard.dehydrate",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^18.19.0",
+    "@vscode/test-electron": "^2.3.0",
+    "typescript": "^5.3.0"
+  }
+}
