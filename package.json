@@ -2,7 +2,7 @@
   "name": "token-guard",
   "displayName": "TokenGuard: AI Code Dehydrator",
   "description": "Dehydrate code to save 50%+ tokens for Cursor and Claude. Eliminate comments, compress whitespace, and protect Python indentation — one-click to clipboard.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "justinxai",
   "engines": {
     "vscode": "^1.85.0"

@@ -36,6 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
+const dehydrator_1 = require("./dehydrator");
 function activate(context) {
     const disposable = vscode.commands.registerCommand('token-guard.dehydrate', async () => {
         const editor = vscode.window.activeTextEditor;
@@ -49,19 +50,9 @@ function activate(context) {
             void vscode.window.showInformationMessage('No text selected. Please select code to dehydrate.');
             return;
         }
-        const originalLength = selectedText.length;
-        let dehydrated = selectedText
-            .replace(/\/\*\*[\s\S]*?\*\//g, '')
-            .replace(/\/\/.*/g, '');
-        const lines = dehydrated.split('\n');
-        const processedLines = lines
-            .map((line) => line.trimEnd())
-            .filter((line) => line.length > 0);
-        dehydrated = processedLines.join('\n');
-        const saved = originalLength - dehydrated.length;
-        const percentage = Math.round((saved / originalLength) * 100);
-        await vscode.env.clipboard.writeText(dehydrated);
-        const action = await vscode.window.showInformationMessage(`Tokens saved: ${percentage}%. Compressed code copied to clipboard!`, 'Try Clipper (Chrome)');
+        const result = await (0, dehydrator_1.semanticSkim)(selectedText);
+        await vscode.env.clipboard.writeText(result.markdown);
+        const action = await vscode.window.showInformationMessage(`⚡ Semantic Skim applied. Logic preserved. Tokens saved: ${result.savedPercent}%.`, 'Try Clipper (Chrome)');
         if (action === 'Try Clipper (Chrome)') {
             await vscode.env.openExternal(vscode.Uri.parse('https://github.com/JustinXai/cursor-context-clipper'));
         }

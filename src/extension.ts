@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { semanticSkim } from './dehydrator';
 
 export function activate(context: vscode.ExtensionContext): void {
   const disposable = vscode.commands.registerCommand('token-guard.dehydrate', async () => {
@@ -17,25 +18,12 @@ export function activate(context: vscode.ExtensionContext): void {
       return;
     }
 
-    const originalLength = selectedText.length;
+    const result = await semanticSkim(selectedText);
 
-    let dehydrated = selectedText
-      .replace(/\/\*\*[\s\S]*?\*\//g, '')
-      .replace(/\/\/.*/g, '');
-
-    const lines = dehydrated.split('\n');
-    const processedLines = lines
-      .map((line: string) => line.trimEnd())
-      .filter((line: string) => line.length > 0);
-    dehydrated = processedLines.join('\n');
-
-    const saved = originalLength - dehydrated.length;
-    const percentage = Math.round((saved / originalLength) * 100);
-
-    await vscode.env.clipboard.writeText(dehydrated);
+    await vscode.env.clipboard.writeText(result.markdown);
 
     const action = await vscode.window.showInformationMessage(
-      `Tokens saved: ${percentage}%. Compressed code copied to clipboard!`,
+      `⚡ Semantic Skim applied. Logic preserved. Tokens saved: ${result.savedPercent}%. 💎 Early Access: Pro features unlocked for you!`,
       'Try Clipper (Chrome)'
     );
 
