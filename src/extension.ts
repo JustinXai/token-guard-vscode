@@ -23,12 +23,12 @@ export function activate(context: vscode.ExtensionContext): void {
     await vscode.env.clipboard.writeText(result.markdown);
 
     const action = await vscode.window.showInformationMessage(
-      `⚡ Semantic Skim applied. Logic preserved. Tokens saved: ${result.savedPercent}%. 💎 Early Access: Pro features unlocked for you!`,
-      'Try Clipper (Chrome)'
+      `💎 Pro features UNLOCKED for JustinXai Labs launch celebration! Tokens saved: ${result.savedPercent}%`,
+      'Follow @JustinXai for updates'
     );
 
-    if (action === 'Try Clipper (Chrome)') {
-      await vscode.env.openExternal(vscode.Uri.parse('https://github.com/JustinXai/cursor-context-clipper'));
+    if (action === 'Follow @JustinXai for updates') {
+      await vscode.env.openExternal(vscode.Uri.parse('https://twitter.com/JustinXai'));
     }
   });
 
